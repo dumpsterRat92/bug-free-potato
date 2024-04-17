@@ -1,5 +1,15 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require('path');
+const { Circle, Square, Triangle } = require('./lib/shapes');  
+
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    fs.mkdirSync(dirname, { recursive: true });
+}
 
 function generateSVG(text, textColor, shape, shapeColor) {
     let shapeObject;
@@ -11,20 +21,28 @@ function generateSVG(text, textColor, shape, shapeColor) {
             shapeObject = new Square(shapeColor);
             break;
         case 'triangle':
-            hapeObject = new Triangle(shapeColor);
+            shapeObject = new Triangle(shapeColor);
             break;
     }
 
-    return `
-        <svg width="300" height="200" xmlns=""http://www.w3.org/2000/svg">
-         ${shapeObject.render()}
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="40" font-family="Arial">${text}</text>
+    const svgContent = `
+        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${shapeObject.render()}
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="40" font-family="Arial">${text}</text>
         </svg>
     `;
 
+
+    const filePath = path.resolve(__dirname, 'examples/logo.svg');
+    ensureDirectoryExistence(filePath);
+
+
+    fs.writeFileSync(filePath, svgContent);
+    console.log('Generated logo.svg in the examples folder');
+    return filePath; 
 }
 
-function  createLogo() {
+function createLogo() {
     inquirer.prompt([
         {
             type: 'input',
@@ -52,10 +70,10 @@ function  createLogo() {
         }
     ]).then(answers => {
         const { text, textColor, shape, shapeColor } = answers;
-        const svgContent = generateSVG(text, textColor, shape, shapeColor);
-        fs.writeFileSync('logo.svg', svgContent);
-        console.log('Generated logo.svg');
+        generateSVG(text, textColor, shape, shapeColor);  // Generates SVG and handles file writing
+    }).catch(error => {
+        console.error('An error occurred:', error);
     });
-    }
+}
 
-    module.exports = { createLogo, generateSVG };
+module.exports = { createLogo, generateSVG };
