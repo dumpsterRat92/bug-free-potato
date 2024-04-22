@@ -3,13 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const { Circle, Square, Triangle } = require('./lib/shapes');  
 
-// function ensureDirectoryExistence(filePath) {
-//     const dirname = path.dirname(filePath);
-//     if (fs.existsSync(dirname)) {
-//         return true;
-//     }
-//     fs.mkdirSync(dirname, { recursive: true });
-// }
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    fs.mkdirSync(dirname, { recursive: true });
+}
 
 function generateSVG(text, textColor, shape, shapeColor) {
     let shapeObject;
