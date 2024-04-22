@@ -1,6 +1,7 @@
 {
   "name": "svglogo",
   "version": "1.0.0",
+  "type":"module",
   "description": "svglogo",
   "main": "index.js",
   "directories": {
