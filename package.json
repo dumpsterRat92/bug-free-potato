@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/dumpsterRat92/bug-free-potato#readme",
   "dependencies": {
-    "inquirer": "^9.2.19",
+    "inquirer": "^8.2.4",
     "jest": "^29.7.0"
   }
 }

@@ -77,3 +77,4 @@ function createLogo() {
 }
 
 module.exports = { createLogo, generateSVG };
+createLogo();
