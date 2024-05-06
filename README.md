@@ -3,6 +3,9 @@
 ## Description
 This project provides a simple Node.js application for creating SVG logos. It leverages the power of Node.js to create scalable vector graphics based on user inputs. The application supports generating logos with three different shapes: Circle, Square, and Triangle, with customizable colors.
 
+## Link to Video
+![Video](https://drive.google.com/file/d/1678Fjia1lyV1Y0bR8Y5DTVMLLVACDUUq/view)
+
 ## Features
 - Generate SVG logos with custom text and colors.
 - Choose from three shapes: Circle, Square, and Triangle.
